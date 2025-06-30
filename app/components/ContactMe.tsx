@@ -3,10 +3,14 @@ import { motion, Variants } from "framer-motion";
 import { FiMail, FiMapPin, FiClock } from "react-icons/fi";
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 import { useState, useEffect } from "react";
-
+interface Formdata{
+  name:string;
+  email:string;
+  message:string;
+}
 const ContactMe = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Formdata>({
     name: '',
     email: '',
     message: ''
@@ -61,10 +65,31 @@ const ContactMe = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     // Add your form submission logic here
+    try {
+      const res = await fetch('/api/contact',{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(formData)
+      })
+
+      if(!res.ok){
+        throw new Error("Failed to send message")
+      }
+      console.log('response data :',res)
+      setFormData({
+        name:'',
+        email:'',
+        message:''
+      })
+    } catch (error) {
+      throw new Error('Internal Server error')
+    }
     console.log('Form submitted:', formData);
     setTimeout(() => {
       setIsSubmitting(false);

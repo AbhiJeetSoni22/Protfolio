@@ -24,7 +24,7 @@ export const projects:Projects[] = [
         title: 'ImageKit',
         description: ' A video upload platform where users can upload and manage their videos securely.',
         technologies: ['NextJs', 'TypeScript','Tailwind CSS','Framer Motion'],
-        githubLink: 'https://github.com',
+        githubLink: 'https://github.com/AbhiJeetSoni22/imagekit',
         demoLink: 'https://imagekit-ecru.vercel.app/',
         image: '/projects/Image.webp',
       },
