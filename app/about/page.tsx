@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 // import { usePathname } from 'next/navigation';
 import { FiBriefcase, FiCode } from "react-icons/fi";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import InternshipExperience from "../components/InternshipExperience";
+
 
 const AboutMe = () => {
   const [isMounted, setIsMounted] = useState(false);
