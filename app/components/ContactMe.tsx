@@ -88,7 +88,7 @@ const ContactMe = () => {
         message:''
       })
     } catch (error) {
-      throw new Error('Internal Server error')
+      throw new Error('Internal Server error', { cause: error })
     }
     console.log('Form submitted:', formData);
     setTimeout(() => {
