@@ -51,8 +51,8 @@ const AboutMe = () => {
 
   const stats = [
     {
-      value: "1+",
-      label: "Years Experience",
+      value: "7+",
+      label: "months Experience",
       icon: <FiBriefcase className="w-6 h-6" />,
     },
     {
