@@ -59,7 +59,7 @@ const InternshipExperience = () => {
               and tool usage with large language models.
             </li>
             <li>
-              Developed <span className="text-white font-medium">RAG / RAGA systems</span> integrating vector search,
+              Developed <span className="text-white font-medium">RAG / RAGA systems </span> integrating vector search,
               context retrieval, and LLM orchestration.
             </li>
             <li>
