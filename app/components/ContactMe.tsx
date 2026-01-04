@@ -90,11 +90,15 @@ const ContactMe = () => {
     } catch (error) {
       throw new Error('Internal Server error', { cause: error })
     }finally{
-    alert("Message sent successfully!");
+ 
     setTimeout(() => {
       setIsSubmitting(false);
       // Reset form or show success message
-    }, 300);
+    }, 1900);
+     setTimeout(() => {
+    alert("Message sent successfully!");
+  
+  }, 2000); 
     }
     
   };
