@@ -3,17 +3,17 @@ import { motion, Variants } from "framer-motion";
 import { FiMail, FiMapPin, FiClock } from "react-icons/fi";
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 import { useState, useEffect } from "react";
-interface Formdata{
-  name:string;
-  email:string;
-  message:string;
+interface Formdata {
+  name: string;
+  email: string;
+  message: string;
 }
 const ContactMe = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [formData, setFormData] = useState<Formdata>({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -28,9 +28,9 @@ const ContactMe = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
+        delayChildren: 0.3,
+      },
+    },
   };
 
   const itemVariants: Variants = {
@@ -40,9 +40,9 @@ const ContactMe = () => {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   const titleVariants: Variants = {
@@ -52,64 +52,69 @@ const ContactMe = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { id, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [id]: value
+      [id]: value,
     }));
   };
 
-  const handleSubmit = async(e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     // Add your form submission logic here
     try {
-      const res = await fetch('/api/contact',{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        body:JSON.stringify(formData)
-      })
+        body: JSON.stringify(formData),
+      });
 
-      if(!res.ok){
-        throw new Error("Failed to send message")
+      if (!res.ok) {
+        throw new Error("Failed to send message");
       }
-      console.log('response data :',res)
+      console.log("response data :", res);
       setFormData({
-        name:'',
-        email:'',
-        message:''
-      })
+        name: "",
+        email: "",
+        message: "",
+      });
     } catch (error) {
-      throw new Error('Internal Server error', { cause: error })
-    }finally{
- 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      // Reset form or show success message
-    }, 1900);
-     setTimeout(() => {
-    alert("Message sent successfully!");
-  
-  }, 2000); 
+      throw new Error("Internal Server error", { cause: error });
+    } finally {
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
+        setIsSubmitting(false);
+        // Reset form or show success message
+      }, 1900);
+      setTimeout(() => {
+        alert("Message sent successfully!");
+      }, 2000);
     }
-    
   };
 
-  
   if (!isMounted) {
     return (
       <section id="contact" className="py-10 bg-white dark:bg-gray-900">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center py-20">
-            <p className="text-gray-600 dark:text-gray-300">Loading contact information...</p>
+            <p className="text-gray-600 dark:text-gray-300">
+              Loading contact information...
+            </p>
           </div>
         </div>
       </section>
@@ -126,10 +131,14 @@ const ContactMe = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">
-            Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500">Touch</span>
+            Get In{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500">
+              Touch
+            </span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? Feel free to reach out!
+            Have a project in mind or want to collaborate? Feel free to reach
+            out!
           </p>
         </motion.div>
 
@@ -142,11 +151,16 @@ const ContactMe = () => {
             viewport={{ once: true, margin: "-50px" }}
             className="bg-white dark:bg-gray-800/50 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700"
           >
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Send Me a Message</h3>
-            
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+              Send Me a Message
+            </h3>
+
             <form className="space-y-6" onSubmit={handleSubmit}>
               <motion.div variants={itemVariants}>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
                   Your Name
                 </label>
                 <input
@@ -161,7 +175,10 @@ const ContactMe = () => {
               </motion.div>
 
               <motion.div variants={itemVariants}>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
                   Email Address
                 </label>
                 <input
@@ -176,7 +193,10 @@ const ContactMe = () => {
               </motion.div>
 
               <motion.div variants={itemVariants}>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
                   Your Message
                 </label>
                 <textarea
@@ -194,9 +214,11 @@ const ContactMe = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full px-6 py-3 bg-gradient-to-r from-primary to-cyan-500 text-white font-medium rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-1 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
+                  className={`w-full px-6 py-3 bg-gradient-to-r from-primary to-cyan-500 text-white font-medium rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-1 ${
+                    isSubmitting ? "opacity-75 cursor-not-allowed" : ""
+                  }`}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
               </motion.div>
             </form>
@@ -210,14 +232,16 @@ const ContactMe = () => {
             viewport={{ once: true, margin: "-50px" }}
             className="space-y-8"
           >
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="bg-white dark:bg-gray-800/50 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700"
             >
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Contact Information</h3>
-              
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+                Contact Information
+              </h3>
+
               <div className="space-y-6">
-                <motion.div 
+                <motion.div
                   whileHover={{ x: 5 }}
                   className="flex items-start gap-4"
                 >
@@ -225,9 +249,11 @@ const ContactMe = () => {
                     <FiMail className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Email</h4>
-                    <a 
-                      href="mailto:abhisonijeet123@gmail.com" 
+                    <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                      Email
+                    </h4>
+                    <a
+                      href="mailto:abhisonijeet123@gmail.com"
                       className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-cyan-400 transition-colors"
                     >
                       abhisonijeet123@gmail.com
@@ -235,7 +261,7 @@ const ContactMe = () => {
                   </div>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                   whileHover={{ x: 5 }}
                   className="flex items-start gap-4"
                 >
@@ -243,12 +269,16 @@ const ContactMe = () => {
                     <FiMapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Location</h4>
-                    <p className="text-gray-600 dark:text-gray-400">Sagar, MP, India</p>
+                    <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                      Location
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      Sagar, MP, India
+                    </p>
                   </div>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                   whileHover={{ x: 5 }}
                   className="flex items-start gap-4"
                 >
@@ -256,19 +286,25 @@ const ContactMe = () => {
                     <FiClock className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Availability</h4>
-                    <p className="text-gray-600 dark:text-gray-400">Monday - Friday, 11AM - 5PM IST</p>
+                    <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                      Availability
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      Monday - Friday, 11AM - 5PM IST
+                    </p>
                   </div>
                 </motion.div>
               </div>
             </motion.div>
 
             {/* Social Links */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="bg-white dark:bg-gray-800/50 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700"
             >
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Connect With Me</h3>
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+                Connect With Me
+              </h3>
               <div className="flex gap-4">
                 <motion.a
                   whileHover={{ y: -5 }}
