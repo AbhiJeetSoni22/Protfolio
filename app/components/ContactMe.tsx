@@ -97,6 +97,7 @@ const ContactMe = () => {
     }, 1500);
   };
 
+  
   if (!isMounted) {
     return (
       <section id="contact" className="py-10 bg-white dark:bg-gray-900">
