@@ -62,6 +62,7 @@ const AboutMe = () => {
     },
   ];
 
+  
   const skills = [
     { name: "Frontend (Next.js, Tailwind)", level: 85 },
     { name: "Backend (Node.js, MongoDB)", level: 85 },
